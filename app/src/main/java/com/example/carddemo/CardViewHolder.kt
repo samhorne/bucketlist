@@ -1,11 +1,11 @@
 package com.example.carddemo
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carddemo.databinding.CardCellBinding
+import com.example.carddemo.databinding.CountryCardBinding
 import com.squareup.picasso.Picasso
 
 class CardViewHolder(
-    private val cardCellBinding: CardCellBinding
+    private val cardCellBinding: CountryCardBinding
 ): RecyclerView.ViewHolder(cardCellBinding.root) {
     fun bindBook(book: Book){
 //        cardCellBinding.cover.setImageResource(book.cover)
