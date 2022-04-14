@@ -6,7 +6,8 @@
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.5911458333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.41847826086956524" />
         <entry key="app/src/main/res/layout/card_cell.xml" value="0.5911458333333334" />
-        <entry key="app/src/main/res/layout/music_card.xml" value="0.41530797101449274" />
+        <entry key="app/src/main/res/layout/image_card.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/music_card.xml" value="0.375" />
       </map>
     </option>
   </component>
