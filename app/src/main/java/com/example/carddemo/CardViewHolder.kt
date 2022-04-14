@@ -8,9 +8,10 @@ class CardViewHolder(
     private val cardCellBinding: CardCellBinding
 ): RecyclerView.ViewHolder(cardCellBinding.root) {
     fun bindBook(book: Book){
-        cardCellBinding.cover.setImageResource(book.cover)
+//        cardCellBinding.cover.setImageResource(book.cover)
+        cardCellBinding.title.text = book.title
         val picasso = Picasso.get()
-        picasso.load("https://www.commonwealthfund.org/sites/default/files/styles/countries_hero_desktop/public/country_image_Japan.jpg")
+        picasso.load(book.cover)
             .into(cardCellBinding.cover)
     }
 }
