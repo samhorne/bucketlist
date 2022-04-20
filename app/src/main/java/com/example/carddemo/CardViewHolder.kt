@@ -5,7 +5,8 @@ import com.example.carddemo.databinding.CountryCardBinding
 import com.squareup.picasso.Picasso
 
 class CardViewHolder(
-    private val cardCellBinding: CountryCardBinding
+    private val cardCellBinding: CountryCardBinding,
+    private val clickListener: LocationClickListener
 ): RecyclerView.ViewHolder(cardCellBinding.root) {
     fun bindBook(book: Book){
 //        cardCellBinding.cover.setImageResource(book.cover)
@@ -13,5 +14,9 @@ class CardViewHolder(
         val picasso = Picasso.get()
         picasso.load(book.cover)
             .into(cardCellBinding.cover)
+
+        cardCellBinding.locationCardView.setOnClickListener{
+            clickListener.onClick(book)
+        }
     }
 }

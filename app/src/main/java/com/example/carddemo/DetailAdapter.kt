@@ -3,12 +3,12 @@ package com.example.carddemo
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carddemo.databinding.SuggestionCardBinding
+import com.example.carddemo.databinding.ImageCardBinding
 
 class DetailAdapter(private val suggestions: List<Suggestion>): RecyclerView.Adapter<SuggestionViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionViewHolder {
         val from = LayoutInflater.from(parent.context)
-        val binding = SuggestionCardBinding.inflate(from, parent, false)
+        val binding = ImageCardBinding.inflate(from, parent, false)
         return SuggestionViewHolder(binding)
     }
 

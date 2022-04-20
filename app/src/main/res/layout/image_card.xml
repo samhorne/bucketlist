@@ -34,6 +34,12 @@
             android:src="@drawable/tokyo"
             />
 
+        <TextView
+            android:id="@+id/suggestiontextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

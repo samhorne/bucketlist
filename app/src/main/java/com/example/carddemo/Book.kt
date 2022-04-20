@@ -2,6 +2,8 @@ package com.example.carddemo
 
 var bookList = mutableListOf<Book>()
 
+val LOC_ID_EXTRA = "bookExtra"
+
 class Book(
     var cover: String,
     var title: String,

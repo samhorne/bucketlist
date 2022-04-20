@@ -1,11 +1,12 @@
 package com.example.carddemo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.carddemo.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LocationClickListener {
     private lateinit var binding:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,15 +18,22 @@ class MainActivity : AppCompatActivity() {
         val mainActivity = this
         binding.recyclerView.apply{
             layoutManager = GridLayoutManager(applicationContext, 3)
-            adapter = CardAdapter(bookList)
+            adapter = CardAdapter(bookList, mainActivity)
         }
+    }
+
+    override fun onClick(book: Book) {
+        val intent = Intent(applicationContext, DetailActivity::class.java)
+        intent.putExtra(LOC_ID_EXTRA, book.id)
+        startActivity(intent)
+
     }
 
     private fun populateBooks()
     {
         val book1 = Book(
             "https://www.commonwealthfund.org/sites/default/files/styles/countries_hero_desktop/public/country_image_Japan.jpg",
-            "Tokyo",
+            "Japan",
             "AGELESS BODY, TIMELESS MIND",
         )
         bookList.add(book1)
@@ -38,21 +46,21 @@ class MainActivity : AppCompatActivity() {
         bookList.add(book2)
 
         val book3 = Book(
-            "https://www.thedrinksbusiness.com/content/uploads/2016/09/Shanghai-1024x488.jpg",
+            "https://uceap.universityofcalifornia.edu/sites/default/files/marketing-images/program-page-images/shanghai-summer-glance.jpg",
             "Shanghai",
             "THE ROAD LESS TRAVELLED",
         )
         bookList.add(book3)
 
         val book4 = Book(
-            "https://wallpaperaccess.com/full/1150751.jpg",
+            "https://www.planetware.com/wpimages/2019/12/israel-in-pictures-beautiful-places-to-photograph-the-western-wall.jpg",
             "Israel",
             "IT ENDS WITH US",
         )
         bookList.add(book4)
 
         val book5 = Book(
-            "https://media.cntraveler.com/photos/5a985924d41cc84048ce6db0/master/w_4348,h_3261,c_limit/Catedral-de-Barcelona-GettyImages-511874340.jpg",
+            "https://dynaimage.cdn.cnn.com/cnn/q_auto,w_1770,c_fill,g_auto,h_996,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F170706113411-spain.jpg",
             "Spain",
             "IN PLAIN SIGHT",
         )
@@ -81,4 +89,5 @@ class MainActivity : AppCompatActivity() {
         bookList.add(book6)
         bookList.add(book7)
     }
+
 }
