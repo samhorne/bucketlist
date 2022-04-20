@@ -2,18 +2,24 @@ package com.example.carddemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carddemo.databinding.ActivityDetailBinding
 import com.example.carddemo.databinding.ActivityMainBinding
 //import com.example.carddemo.Request
 import com.google.gson.Gson
+import net.bytebuddy.implementation.MethodCall.run
 import org.json.JSONArray
 import java.net.URL
 
 //data class RepoResult(val items: List<Suggestion>)
 
+
 open class DetailActivity : AppCompatActivity() {
+
+    var suggestionList = MutableLiveData<List<Suggestion>>()
+
     private lateinit var binding:ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +35,16 @@ open class DetailActivity : AppCompatActivity() {
         }
 
         val mainActivity = this
-        binding.detailRecyclerView.apply{
-            layoutManager = LinearLayoutManager(applicationContext)
-            adapter = DetailAdapter(suggestionList)
+        val adapter = DetailAdapter()
+        suggestionList.observe(this) {
+            adapter.suggestions = it
         }
+        binding.detailRecyclerView.apply {
+            layoutManager = LinearLayoutManager(applicationContext)
+            this.adapter = adapter
+        }
+
+
     }
 
     fun bookFromId(id: Int): Book? {
@@ -46,32 +58,30 @@ open class DetailActivity : AppCompatActivity() {
 
     private fun populateSuggestions()
     {
-        val suggestion1 = Suggestion(
-            "Image",
-            "Tokyo",
-            "https://upload.wikimedia.org/wikipedia/commons/f/f9/Marina_Bay_Sands_in_the_evening_-_20101120.jpg",
-            "https://www.google.com/search?q=tokyo"
-        )
-        suggestionList.add(suggestion1)
+//        val suggestion1 = Suggestion(
+//            "Image",
+//            "Tokyo",
+//            "https://upload.wikimedia.org/wikipedia/commons/f/f9/Marina_Bay_Sands_in_the_evening_-_20101120.jpg",
+//            "https://www.google.com/search?q=tokyo",
+//        0
+//        )
+//        suggestionList.add(suggestion1)
 
 //        doAsync {
 //            Request(url).run()
 //            uiThread { longToast("Request performed") }
 //        }
-
-    }
-
-    open fun createObjectsFromApiCall(): List<Suggestion> {
-        var suggestionsToAdd = mutableListOf<Suggestion>()
         var payload = callLocationApi()
-        val gson_rtn =  Gson().fromJson(payload, mutableListOf<Suggestion>()::class.java)
-        return gson_rtn
+        var created_list = SuggestionRepository.createObjectsFromApiCall(payload)
+        suggestionList.value = created_list.suggestions
+
     }
 
     open fun callLocationApi(): String{
-        val URL = "http://10.0.2.2/api/v1/bucketlist/1"
-        val repoListJsonStr = URL(URL).readText()
-        return repoListJsonStr
+        var rqst = MyRequest()
+        var resp = rqst.run()
+//        val repoListJsonStr = URL(URL).readText()
+        return ""
     }
 
 }

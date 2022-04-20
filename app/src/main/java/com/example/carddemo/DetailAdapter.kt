@@ -5,7 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carddemo.databinding.ImageCardBinding
 
-class DetailAdapter(private val suggestions: List<Suggestion>): RecyclerView.Adapter<SuggestionViewHolder>(){
+class DetailAdapter(): RecyclerView.Adapter<SuggestionViewHolder>(){
+
+    var suggestions: List<Suggestion> = mutableListOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionViewHolder {
         val from = LayoutInflater.from(parent.context)
         val binding = ImageCardBinding.inflate(from, parent, false)
