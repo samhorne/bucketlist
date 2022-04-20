@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carddemo.databinding.ActivityDetailBinding
 import com.example.carddemo.databinding.ActivityMainBinding
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
-import org.jetbrains.anko.uiThread
 import com.example.carddemo.Request
+import com.google.gson.Gson
 import org.json.JSONArray
+import java.net.URL
 
-class DetailActivity : AppCompatActivity() {
+data class RepoResult(val items: List<Suggestion>)
+
+open class DetailActivity : AppCompatActivity() {
     private lateinit var binding:ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,17 +54,25 @@ class DetailActivity : AppCompatActivity() {
         )
         suggestionList.add(suggestion1)
 
-        doAsync {
-            Request(url).run()
-            uiThread { longToast("Request performed") }
-        }
+//        doAsync {
+//            Request(url).run()
+//            uiThread { longToast("Request performed") }
+//        }
 
     }
 
-    private fun createObjectsFromApiCall(): MutableList<Suggestion> {
+    open fun createObjectsFromApiCall(): List<Suggestion> {
         var suggestionsToAdd = mutableListOf<Suggestion>()
+        var payload = callLocationApi()
+        return Gson().fromJson(payload, RepoResult::class.java).items
 
         return suggestionsToAdd
+    }
+
+    open fun callLocationApi(): String{
+        val URL = "http://10.0.2.2/api/v1/bucketlist/1"
+        val repoListJsonStr = URL(URL).readText()
+        return repoListJsonStr
     }
 
 }

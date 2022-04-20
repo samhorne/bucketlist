@@ -31,14 +31,20 @@
 package com.example.carddemo
 
 import android.util.Log
+import com.google.gson.Gson
 import java.net.URL
 
+class Request {
 
-class Request(private val url: String) {
-
-  fun run() {
-    val repoListJsonStr = URL(url).readText()
-    Log.d(javaClass.simpleName, repoListJsonStr)
-
+  companion object {
+    //1
+    private const val URL = "http://10.0.2.2/api/v1/bucketlist/1"
+  }
+  //2
+  fun run(): RepoResult {
+    //3
+    val repoListJsonStr = URL(URL).readText()
+    //4
+    return Gson().fromJson(repoListJsonStr, RepoResult::class.java)
   }
 }
