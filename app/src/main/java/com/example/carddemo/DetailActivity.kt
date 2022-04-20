@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.carddemo.databinding.ActivityDetailBinding
 import com.example.carddemo.databinding.ActivityMainBinding
-import com.example.carddemo.Request
+//import com.example.carddemo.Request
 import com.google.gson.Gson
 import org.json.JSONArray
 import java.net.URL
 
-data class RepoResult(val items: List<Suggestion>)
+//data class RepoResult(val items: List<Suggestion>)
 
 open class DetailActivity : AppCompatActivity() {
     private lateinit var binding:ActivityDetailBinding
@@ -64,9 +64,8 @@ open class DetailActivity : AppCompatActivity() {
     open fun createObjectsFromApiCall(): List<Suggestion> {
         var suggestionsToAdd = mutableListOf<Suggestion>()
         var payload = callLocationApi()
-        return Gson().fromJson(payload, RepoResult::class.java).items
-
-        return suggestionsToAdd
+        val gson_rtn =  Gson().fromJson(payload, mutableListOf<Suggestion>()::class.java)
+        return gson_rtn
     }
 
     open fun callLocationApi(): String{

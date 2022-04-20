@@ -2,7 +2,7 @@ package com.example.carddemo
 
 var suggestionList = mutableListOf<Suggestion>()
 
-class Suggestion(
+data class Suggestion(
     var type: String,
     var title: String,
     var img_url: String,
