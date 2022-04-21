@@ -1,7 +1,7 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carddemo.databinding.CountryCardBinding
+import com.example.bucketlist.databinding.CountryCardBinding
 import com.squareup.picasso.Picasso
 
 class CardViewHolder(

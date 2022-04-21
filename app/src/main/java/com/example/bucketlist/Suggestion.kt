@@ -1,4 +1,4 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 data class Suggestion(
     var type: String,
@@ -11,5 +11,5 @@ data class Suggestion(
 data class RepoResult(
     val id: Int,
     val name: String,
-    val suggestions: List<Suggestion>,
+    val suggestions: List<Suggestion>?,
     )

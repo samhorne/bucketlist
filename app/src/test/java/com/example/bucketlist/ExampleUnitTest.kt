@@ -1,6 +1,5 @@
-package com.example.carddemo
+package com.example.bucketlist
 
-import org.mockito.kotlin.*
 import org.junit.Test
 import org.junit.Assert.*
 

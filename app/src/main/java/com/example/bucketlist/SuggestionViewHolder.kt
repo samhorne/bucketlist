@@ -1,8 +1,7 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.carddemo.databinding.ImageCardBinding
+import com.example.bucketlist.databinding.ImageCardBinding
 import com.squareup.picasso.Picasso
 
 class SuggestionViewHolder(
@@ -16,6 +15,8 @@ class SuggestionViewHolder(
         val picasso = Picasso.get()
         picasso.load(suggestion.img_url)
             .into(suggestionCellBinding.cover)
+
+        suggestionCellBinding.suggestiontextView.text = suggestion.text
 
 //        //Glide way
 //        Glide

@@ -1,9 +1,9 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.carddemo.databinding.CountryCardBinding
+import com.example.bucketlist.databinding.CountryCardBinding
 
 class CardAdapter(
     private val books: List<Book>,

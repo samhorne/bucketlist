@@ -1,4 +1,4 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 var bookList = mutableListOf<Book>()
 

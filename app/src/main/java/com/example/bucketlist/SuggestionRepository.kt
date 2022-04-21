@@ -1,4 +1,4 @@
-package com.example.carddemo
+package com.example.bucketlist
 
 import com.google.gson.Gson
 

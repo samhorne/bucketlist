@@ -1,17 +1,14 @@
-package com.example.carddemo
+package com.example.bucketlist
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.carddemo.databinding.ActivityDetailBinding
-import com.example.carddemo.databinding.ActivityMainBinding
 //import com.example.carddemo.Request
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bucketlist.databinding.ActivityDetailBinding
 import com.google.gson.Gson
-import net.bytebuddy.implementation.MethodCall.run
-import org.json.JSONArray
-import java.net.URL
+import okhttp3.*
+import java.io.IOException
 
 //data class RepoResult(val items: List<Suggestion>)
 
@@ -71,17 +68,35 @@ open class DetailActivity : AppCompatActivity() {
 //            Request(url).run()
 //            uiThread { longToast("Request performed") }
 //        }
-        var payload = callLocationApi()
-        var created_list = SuggestionRepository.createObjectsFromApiCall(payload)
-        suggestionList.value = created_list.suggestions
+        //Implement Coroutine Here
+        callLocationApi()
 
     }
 
-    open fun callLocationApi(): String{
-        var rqst = MyRequest()
-        var resp = rqst.run()
+    open fun callLocationApi(){
+
+        val client = OkHttpClient()
+
+        val request = Request.Builder()
+            .url("http://10.0.2.2:8080/api/v1/bucketlist/1")
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                    println(response.toString())
+                    var created_list = Gson().fromJson(response.body()?.string(), RepoResult::class.java)
+                    suggestionList.postValue(created_list.suggestions)
+                }
+            }
+        })
 //        val repoListJsonStr = URL(URL).readText()
-        return ""
     }
 
 }
