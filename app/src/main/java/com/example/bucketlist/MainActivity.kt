@@ -15,27 +15,32 @@ class MainActivity : AppCompatActivity(), LocationClickListener {
     private lateinit var binding:ActivityMainBinding
 
     override fun onStart() {
-       //TODO: Put logs here to learn what each function does.
+        Log.i("activitystate", "onStart called!")
         super.onStart()
     }
 
     override fun onDestroy() {
+        Log.i("activitystate", "onDestroy called!")
         super.onDestroy()
     }
 
     override fun onPause() {
+        Log.i("activitystate", "onPause called!")
         super.onPause()
     }
 
     override fun onStop() {
+        Log.i("activitystate", "onStop called!")
         super.onStop()
     }
 
     override fun onRestart() {
+        Log.i("activitystate", "onRestart called!")
         super.onRestart()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i("activitystate", "onCreate called!")
         val model: BucketViewModel by viewModels()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -1,3 +1,4 @@
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,7 @@ class BucketViewModel : ViewModel() {
             MutableLiveData(loadBooks())
 
     private fun loadBooks(): List<Book> {
+        bookList.clear()
         val book1 = Book(
             "https://www.commonwealthfund.org/sites/default/files/styles/countries_hero_desktop/public/country_image_Japan.jpg",
             "Japan",
@@ -70,5 +72,10 @@ class BucketViewModel : ViewModel() {
         bookList.add(book7)
 
         return bookList
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("activitystate", "onCleared called!")
     }
 }
